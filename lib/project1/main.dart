@@ -1,3 +1,5 @@
+// Project 1 - Build a currency converter app
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -34,7 +36,7 @@ class ConverterForm extends StatefulWidget {
 class ConverterFormState extends State<ConverterForm> {
   final _formKey = GlobalKey<FormState>();
   final _formValue = TextEditingController();
-  final double _rate = 4.93;
+  final double _rate = 4.93; // Set exchange rate
   double _valueToConvert = 0.0;
   String _convertedValue = "";
 
@@ -53,6 +55,7 @@ class ConverterFormState extends State<ConverterForm> {
                   hintText: "enter the amount in EUR",
                 ),
                 keyboardType: TextInputType.number,
+                // Validate input
                 validator: (value) {
                   if (value == null || value.isEmpty || double.tryParse(value.toString())==null){
                     return "please enter a number";
@@ -62,26 +65,27 @@ class ConverterFormState extends State<ConverterForm> {
               ),
               ),
               ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()){
-                  setState(() {
-                    _valueToConvert = double.parse(_formValue.text) * _rate;
-                    _convertedValue = _valueToConvert.toStringAsFixed(2);
-                    _convertedValue = "$_convertedValue RON";
-                  });
-                }
-                else {
-                  setState(() {
-                    _valueToConvert = 0.0;
-                    _convertedValue = "";
-                  });
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white38
-              ),
-              child: const Text("CONVERT!"),
+                onPressed: () {
+                  // If form is validated then calculate the RON value else
+                  // return initial values
+                  if (_formKey.currentState!.validate()){
+                    setState(() {
+                      _valueToConvert = double.parse(_formValue.text) * _rate;
+                      _convertedValue = "${_valueToConvert.toStringAsFixed(2)} RON";
+                    });
+                  }
+                  else {
+                    setState(() {
+                      _valueToConvert = 0.0;
+                      _convertedValue = "";
+                    });
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white38
+                ),
+                child: const Text("CONVERT!"),
               ),
               Text(
                   _convertedValue,

@@ -1,4 +1,4 @@
-import 'package:flutter_course/hw1/main.dart' as run;
+import 'package:flutter_course/project2/main.dart' as run;
 
 void main() {
   run.main();
