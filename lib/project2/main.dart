@@ -1,8 +1,8 @@
 // Project 2 - Build a number checker app that checks if a number is squared or cubed
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
+
 
 void main() => runApp(const MyApp());
 
@@ -26,8 +26,8 @@ class NumberForm extends StatefulWidget {
 }
 
 class _NumberFormState extends State<NumberForm> {
-  final myController = TextEditingController();
-  String _checkResult = "";
+  final TextEditingController myController = TextEditingController();
+  String _checkResult = '';
 
   bool isInteger(num value) =>
       value is int || double.parse(value.toStringAsFixed(2)) == value.roundToDouble();
@@ -47,12 +47,12 @@ class _NumberFormState extends State<NumberForm> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget> [
           // Add the directions for the user
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              "Please input a number to see if it is square or cubed",
+              'Please input a number to see if it is square or cubed',
               style: TextStyle(fontSize: 22),
             ),
           ),
@@ -73,28 +73,28 @@ class _NumberFormState extends State<NumberForm> {
         // When the user presses the button, show an alert dialog with the result
         onPressed: () {
           setState(() {
-            int number = int.tryParse(myController.text)!;
-            num squareRoot = pow(number, 1/2);
-            num cubeRoot = pow(number, 1/3);
+            final int number = int.tryParse(myController.text)!;
+            final num squareRoot = pow(number, 1/2);
+            final num cubeRoot = pow(number, 1/3);
 
             if ((isInteger(squareRoot) || isInteger(cubeRoot)) && number != 1){
               if (isInteger(squareRoot) && isInteger(cubeRoot)){
-                _checkResult = "Number ${myController.text} is both SQUARED and CUBED.";
+                _checkResult = 'Number ${myController.text} is both SQUARED and CUBED.';
               }
               else if (isInteger(squareRoot)){
-                _checkResult = "Number ${myController.text} is SQUARE.";
+                _checkResult = 'Number ${myController.text} is SQUARE.';
               }
               else if (isInteger(cubeRoot)){
-                _checkResult = "Number ${myController.text} is CUBED.";
+                _checkResult = 'Number ${myController.text} is CUBED.';
               }
             }
             else{
-              _checkResult = "Number ${myController.text} is neither CUBED nor SQUARE.";
+              _checkResult = 'Number ${myController.text} is neither CUBED nor SQUARE.';
             }
           });
           showDialog(
             context: context,
-            builder: (context) {
+            builder: (BuildContext context) {
               return AlertDialog(
                 content: Text(_checkResult),
               );

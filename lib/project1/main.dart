@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Currency converter';
+    const String appTitle = 'Currency converter';
 
     return MaterialApp(
       title: appTitle,
@@ -34,11 +34,11 @@ class ConverterForm extends StatefulWidget {
 }
 
 class ConverterFormState extends State<ConverterForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _formValue = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _formValue = TextEditingController();
   final double _rate = 4.93; // Set exchange rate
   double _valueToConvert = 0.0;
-  String _convertedValue = "";
+  String _convertedValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -46,19 +46,18 @@ class ConverterFormState extends State<ConverterForm> {
       key: _formKey,
       child: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+            children: <Widget> [
               Image.asset('images/currency_converter.png', height: 200),
               Padding(padding: const EdgeInsets.all(20), child: TextFormField(
                 controller: _formValue,
                 decoration: const InputDecoration(
-                  hintText: "enter the amount in EUR",
+                  hintText: 'enter the amount in EUR',
                 ),
                 keyboardType: TextInputType.number,
                 // Validate input
-                validator: (value) {
-                  if (value == null || value.isEmpty || double.tryParse(value.toString())==null){
-                    return "please enter a number";
+                validator: (String? value) {
+                  if (value == null || value.isEmpty || double.tryParse(value)==null){
+                    return 'please enter a number';
                   }
                   return null;
                 },
@@ -71,13 +70,13 @@ class ConverterFormState extends State<ConverterForm> {
                   if (_formKey.currentState!.validate()){
                     setState(() {
                       _valueToConvert = double.parse(_formValue.text) * _rate;
-                      _convertedValue = "${_valueToConvert.toStringAsFixed(2)} RON";
+                      _convertedValue = '${_valueToConvert.toStringAsFixed(2)} RON';
                     });
                   }
                   else {
                     setState(() {
                       _valueToConvert = 0.0;
-                      _convertedValue = "";
+                      _convertedValue = '';
                     });
                   }
                 },
@@ -85,7 +84,7 @@ class ConverterFormState extends State<ConverterForm> {
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.white38
                 ),
-                child: const Text("CONVERT!"),
+                child: const Text('CONVERT!'),
               ),
               Text(
                   _convertedValue,
