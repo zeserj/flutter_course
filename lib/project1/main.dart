@@ -45,56 +45,46 @@ class ConverterFormState extends State<ConverterForm> {
     return Form(
       key: _formKey,
       child: Center(
-        child: Column(
-            children: <Widget> [
-              Image.asset('images/currency_converter.png', height: 200),
-              Padding(padding: const EdgeInsets.all(20), child: TextFormField(
-                controller: _formValue,
-                decoration: const InputDecoration(
-                  hintText: 'enter the amount in EUR',
-                ),
-                keyboardType: TextInputType.number,
-                // Validate input
-                validator: (String? value) {
-                  if (value == null || value.isEmpty || double.tryParse(value)==null){
-                    return 'please enter a number';
-                  }
-                  return null;
-                },
+        child: Column(children: <Widget>[
+          Image.asset('images/currency_converter.png', height: 200),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: TextFormField(
+              controller: _formValue,
+              decoration: const InputDecoration(
+                hintText: 'enter the amount in EUR',
               ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // If form is validated then calculate the RON value else
-                  // return initial values
-                  if (_formKey.currentState!.validate()){
-                    setState(() {
-                      _valueToConvert = double.parse(_formValue.text) * _rate;
-                      _convertedValue = '${_valueToConvert.toStringAsFixed(2)} RON';
-                    });
-                  }
-                  else {
-                    setState(() {
-                      _valueToConvert = 0.0;
-                      _convertedValue = '';
-                    });
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.white38
-                ),
-                child: const Text('CONVERT!'),
-              ),
-              Text(
-                  _convertedValue,
-                  style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 30
-                  )
-              ),
-            ]
-        ),
+              keyboardType: TextInputType.number,
+              // Validate input
+              validator: (String? value) {
+                if (value == null || value.isEmpty || double.tryParse(value) == null) {
+                  return 'please enter a number';
+                }
+                return null;
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // If form is validated then calculate the RON value else
+              // return initial values
+              if (_formKey.currentState!.validate()) {
+                setState(() {
+                  _valueToConvert = double.parse(_formValue.text) * _rate;
+                  _convertedValue = '${_valueToConvert.toStringAsFixed(2)} RON';
+                });
+              } else {
+                setState(() {
+                  _valueToConvert = 0.0;
+                  _convertedValue = '';
+                });
+              }
+            },
+            style: ElevatedButton.styleFrom(foregroundColor: Colors.black, backgroundColor: Colors.white38),
+            child: const Text('CONVERT!'),
+          ),
+          Text(_convertedValue, style: const TextStyle(color: Colors.black54, fontSize: 30)),
+        ]),
       ),
     );
   }

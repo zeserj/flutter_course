@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -29,8 +28,7 @@ class _NumberFormState extends State<NumberForm> {
   final TextEditingController myController = TextEditingController();
   String _checkResult = '';
 
-  bool isInteger(num value) =>
-      value is int || double.parse(value.toStringAsFixed(2)) == value.roundToDouble();
+  bool isInteger(num value) => value is int || double.parse(value.toStringAsFixed(2)) == value.roundToDouble();
 
   @override
   void dispose() {
@@ -47,7 +45,7 @@ class _NumberFormState extends State<NumberForm> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget> [
+        children: <Widget>[
           // Add the directions for the user
           const Padding(
             padding: EdgeInsets.all(16.0),
@@ -74,21 +72,18 @@ class _NumberFormState extends State<NumberForm> {
         onPressed: () {
           setState(() {
             final int number = int.tryParse(myController.text)!;
-            final num squareRoot = pow(number, 1/2);
-            final num cubeRoot = pow(number, 1/3);
+            final num squareRoot = pow(number, 1 / 2);
+            final num cubeRoot = pow(number, 1 / 3);
 
-            if ((isInteger(squareRoot) || isInteger(cubeRoot)) && number != 1){
-              if (isInteger(squareRoot) && isInteger(cubeRoot)){
+            if ((isInteger(squareRoot) || isInteger(cubeRoot)) && number != 1) {
+              if (isInteger(squareRoot) && isInteger(cubeRoot)) {
                 _checkResult = 'Number ${myController.text} is both SQUARED and CUBED.';
-              }
-              else if (isInteger(squareRoot)){
+              } else if (isInteger(squareRoot)) {
                 _checkResult = 'Number ${myController.text} is SQUARE.';
-              }
-              else if (isInteger(cubeRoot)){
+              } else if (isInteger(cubeRoot)) {
                 _checkResult = 'Number ${myController.text} is CUBED.';
               }
-            }
-            else{
+            } else {
               _checkResult = 'Number ${myController.text} is neither CUBED nor SQUARE.';
             }
           });
