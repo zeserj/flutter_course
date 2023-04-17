@@ -1,4 +1,4 @@
-import 'project2/main.dart' as run;
+import 'project3/main.dart' as run;
 
 void main() {
   run.main();
