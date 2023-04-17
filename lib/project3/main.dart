@@ -30,7 +30,6 @@ class _NumberFormState extends State<NumberForm> {
   late String _buttonText, _infoText;
   late bool _textFieldEnabled;
 
-
   @override
   void initState() {
     super.initState();
@@ -61,97 +60,83 @@ class _NumberFormState extends State<NumberForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Guess My Number'),
-        centerTitle: true,
-      ),
-      body:
-
-      Center(
-        child: Column(
-          children: <Padding> [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(50,30,50,10),
-              child: Text(
-                "I'm thinking of a number between 1 and 100",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(50,10,50,20),
-              child: Text(
-                "It's your turn to guess my number!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green),
+        appBar: AppBar(
+          title: const Text('Guess My Number'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            children: <Padding>[
+              const Padding(
+                padding: EdgeInsets.fromLTRB(50, 30, 50, 10),
+                child: Text(
+                  "I'm thinking of a number between 1 and 100",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Text(
-                _infoText,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 45,
-                    color: Colors.black45),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(50,10,50,10),
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: <BoxShadow> [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: <Widget> [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(0,10,0,0),
-                        child: Text(
-                          'Try a number!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black45
+              const Padding(
+                padding: EdgeInsets.fromLTRB(50, 10, 50, 20),
+                child: Text(
+                  "It's your turn to guess my number!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                child: Text(
+                  _infoText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 45, color: Colors.black45),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          child: Text(
+                            'Try a number!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black45),
                           ),
                         ),
-                      ),
-                      // Add the input field
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-                        child: TextField(
-                          controller: myController,
-                          // Allow only numbers to be inputted
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                          enabled: _textFieldEnabled,
+                        // Add the input field
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                          child: TextField(
+                            controller: myController,
+                            // Allow only numbers to be inputted
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                            enabled: _textFieldEnabled,
+                          ),
                         ),
-                      ),
-                      Padding(
+                        Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                           child: ElevatedButton(
                             onPressed: () {
-                              if (_buttonText == 'Reset'){
+                              if (_buttonText == 'Reset') {
                                 _resetState();
-                              }
-                              else{
+                              } else {
                                 setState(() {
                                   //print(' the number to guess is: $_numberToGuess ');
-                                  if (int.tryParse(myController.text)! == _numberToGuess){
+                                  if (int.tryParse(myController.text)! == _numberToGuess) {
                                     _buttonText = 'Reset';
                                     _infoText = 'You tried ${myController.text} \n You guessed right.';
                                     showDialog(
@@ -160,52 +145,43 @@ class _NumberFormState extends State<NumberForm> {
                                         return AlertDialog(
                                             title: const Text('You guessed right!'),
                                             content: Text('It was ${myController.text}'),
-                                            actions: <Widget> [
+                                            actions: <Widget>[
                                               TextButton(
-                                                  onPressed: (){
+                                                  onPressed: () {
                                                     Navigator.pop(context, 'Reset');
                                                     _resetState();
                                                   },
-                                                  child: const Text('Try again!')
-                                              ),
+                                                  child: const Text('Try again!')),
                                               TextButton(
-                                                  onPressed: (){
+                                                  onPressed: () {
                                                     Navigator.pop(context, 'OK');
                                                     setState(() {
                                                       myController.text = '';
                                                       _textFieldEnabled = false;
                                                     });
                                                   },
-                                                  child: const Text('OK')
-                                              )
-                                            ]
-                                        );
+                                                  child: const Text('OK'))
+                                            ]);
                                       },
                                     );
-                                  }
-                                  else if (_numberToGuess > int.tryParse(myController.text)!){
+                                  } else if (_numberToGuess > int.tryParse(myController.text)!) {
                                     _infoText = 'You tried ${myController.text} \n Try higher';
-                                  }
-                                  else{
+                                  } else {
                                     _infoText = 'You tried ${myController.text} \n Try lower';
                                   }
                                 });
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.black,
-                                backgroundColor: Colors.white38
-                            ),
+                                foregroundColor: Colors.black, backgroundColor: Colors.white38),
                             child: Text(_buttonText),
                           ),
-                      ),
-                    ],
-                  )
+                        ),
+                      ],
+                    )),
               ),
-            ),
-          ],
-        ),
-      )
-    );
+            ],
+          ),
+        ));
   }
 }
