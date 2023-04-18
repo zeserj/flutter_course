@@ -23,7 +23,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _xTurn = true;
+  bool _xTurn = true; //keep track of player turn
+  bool _playing = true; //keep track if game is running
   final List<String> _board = <String>['', '', '', '', '', '', '', '', ''];
   int _xScore = 0;
   int _oScore = 0;
@@ -58,11 +59,13 @@ class _HomePageState extends State<HomePage> {
         } else {
           _oScore++;
         }
+        _playing = false;
         _showDialog(a);
         break;
       }
     }
     if (!_board.contains('') && !winnerFound) {
+      _playing = false;
       _showDialog('draw');
     }
   }
@@ -83,6 +86,7 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                   onPressed: () {
                     _clearBoard();
+                    _playing = true;
                     Navigator.pop(context, 'Reset');
                   },
                   child: const Text('Play Again'))
@@ -157,7 +161,9 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          _tapped(index);
+                          if (_playing) {
+                            _tapped(index);
+                          }
                         },
                         child: Container(
                           decoration: BoxDecoration(border: Border.all(color: Colors.white)),
@@ -172,6 +178,16 @@ class _HomePageState extends State<HomePage> {
                     })),
             Expanded(
                 child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black45,
+                ),
+                onPressed: () {
+                  _clearBoard();
+                  _playing = true;
+                },
+                child: const Text('Play again'),
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black45,
