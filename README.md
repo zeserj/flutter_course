@@ -12,7 +12,7 @@ This course had **xx** projects and a **final** project as detailed below:
 
 - Project 3 - Build an app where you guess a number
 <img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project1.gif width="40%" height="40%">
-- 
+
 - Project 4 - Build a Tic-Tac-Toe game
 <img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project1.gif width="40%" height="40%">
 
