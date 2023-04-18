@@ -8,13 +8,13 @@ This course had **xx** projects and a **final** project as detailed below:
 <img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project1.gif width="40%" height="40%">
 
 - Project 2 - Build a number checker app that checks if a number is squared or cubed
-<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project1.gif width="40%" height="40%">
+<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project2.gif width="40%" height="40%">
 
 - Project 3 - Build an app where you guess a number
-<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project1.gif width="40%" height="40%">
+<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project3.gif width="40%" height="40%">
 
 - Project 4 - Build a Tic-Tac-Toe game
-<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project1.gif width="40%" height="40%">
+<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project4.gif width="40%" height="40%">
 
 - Project 5 - Build a 
 - Project 6 - Build a 
