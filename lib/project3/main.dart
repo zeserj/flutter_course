@@ -1,5 +1,4 @@
 // Project 3 - Build an app where you guess a number
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Retrieve Text Input',
+      title: 'Guess My Number',
       home: NumberForm(),
     );
   }
