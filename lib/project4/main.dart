@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _xTurn = true;
-  List<String> _board = ['', '', '', '', '', '', '', '', ''];
+  final List<String> _board = <String>['', '', '', '', '', '', '', '', ''];
   int _xScore = 0;
   int _oScore = 0;
 
@@ -42,10 +42,10 @@ class _HomePageState extends State<HomePage> {
 
   void _checkWinner() {
     bool winnerFound = false;
-    const List<List<int>> winningCombinations = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8], //Rows
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], //Columns
-      [0, 4, 8], [2, 4, 6] //Diagonals
+    const List<List<int>> winningCombinations = <List<int>>[
+      <int>[0, 1, 2], <int>[3, 4, 5], <int>[6, 7, 8], //Rows
+      <int>[0, 3, 6], <int>[1, 4, 7], <int>[2, 5, 8], //Columns
+      <int>[0, 4, 8], <int>[2, 4, 6] //Diagonals
     ];
     for (final List<int> combination in winningCombinations) {
       final String a = _board[combination[0]];
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(message),
-            actions: [
+            actions: <Widget>[
               TextButton(
                   onPressed: () {
                     _clearBoard();
