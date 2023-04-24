@@ -33,11 +33,13 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if (_xTurn && _board[index] == '') {
         _board[index] = 'X';
+        _xTurn = !_xTurn;
+        _checkWinner();
       } else if (!_xTurn && _board[index] == '') {
         _board[index] = 'O';
+        _xTurn = !_xTurn;
+        _checkWinner();
       }
-      _xTurn = !_xTurn;
-      _checkWinner();
     });
   }
 
