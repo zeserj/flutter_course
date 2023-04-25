@@ -12,7 +12,7 @@ class UnsplashApi {
         scheme: 'https',
         host: 'api.unsplash.com',
         path: '/photos/random',
-        queryParameters: {'client_id': '$_accessKey'});
+        queryParameters: <String, String?>{'client_id': '$_accessKey'});
 
     final http.Response response = await http.get(url);
 
