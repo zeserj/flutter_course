@@ -9,20 +9,21 @@ class UnsplashApi {
 
   static Future<List<String>> getRandomImageUrls() async {
     final Uri url = Uri(
-        scheme: 'https',
-        host: 'api.unsplash.com',
-        path: '/photos/random',
-        queryParameters: <String, String?>{
-          'client_id': '$_accessKey',
-          'count': '20'
-        },
+      scheme: 'https',
+      host: 'api.unsplash.com',
+      path: '/photos/random',
+      queryParameters: <String, String?>{'client_id': '$_accessKey', 'count': '20'},
     );
 
     final http.Response response = await http.get(url);
 
     if (response.statusCode == 200) {
       final List<dynamic> body = json.decode(response.body) as List<dynamic>;
-      return body.map((dynamic image)=> image as Map<String, dynamic>).map((Map<String, dynamic> image) => image ['urls'] as Map<String, dynamic>).map((Map<String, dynamic> urls) => urls['regular'] as String).toList();
+      return body
+          .map((dynamic image) => image as Map<String, dynamic>)
+          .map((Map<String, dynamic> image) => image['urls'] as Map<String, dynamic>)
+          .map((Map<String, dynamic> urls) => urls['regular'] as String)
+          .toList();
     } else {
       throw Exception('Failed to load image');
     }
@@ -74,20 +75,21 @@ class _MyAppState extends State<MyApp> {
       crossAxisSpacing: 4,
       mainAxisSpacing: 4,
       crossAxisCount: 2,
-      children: _imageUrls.map<Widget>((String imageUrl) => Image.network(
-        imageUrl,
-        fit: BoxFit.cover,
-        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return const CircularProgressIndicator();
-        },
-        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) => const Icon(Icons.error),
-      )).toList(),
+      children: _imageUrls
+          .map<Widget>((String imageUrl) => Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+                  return const CircularProgressIndicator();
+                },
+                errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) => const Icon(Icons.error),
+              ))
+          .toList(),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +97,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(title: const Text('Unsplash App'), centerTitle: true),
         body: Center(
-          child: _isLoading
-              ? const CircularProgressIndicator()
-              : _buildImageGrid(),
+          child: _isLoading ? const CircularProgressIndicator() : _buildImageGrid(),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: _loadImage,
