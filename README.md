@@ -16,7 +16,9 @@ This course had **xx** projects and a **final** project as detailed below:
 - Project 4 - Build a Tic-Tac-Toe game
 <img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project4.gif width="40%" height="40%">
 
-- Project 5 - Build a 
+- Project 5 - Build a random image generator using Unsplash API
+<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project5.gif width="40%" height="40%">
+
 - Project 6 - Build a 
 - Project 7 - Build a 
 - Project 8 - Build a 
