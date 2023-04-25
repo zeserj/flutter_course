@@ -88,18 +88,19 @@ class _MyAppState extends State<MyApp> {
           crossAxisCount: 2,
           children: _imageUrls
               .map<Widget>((String imageUrl) => Image.network(
-            imageUrl,
-            fit: BoxFit.cover,
-            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return const CircularProgressIndicator();
-            },
-            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) => const Icon(Icons.error),
-          )).toList(),
-        )
-    );
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) =>
+                        const Icon(Icons.error),
+                  ))
+              .toList(),
+        ));
   }
 
   Widget _buildDropdowns() {
@@ -120,7 +121,7 @@ class _MyAppState extends State<MyApp> {
             setState(() {
               _count = value!;
             });
-            },
+          },
           items: _countOptions.map<DropdownMenuItem<int>>((int value) {
             return DropdownMenuItem<int>(
               value: value,
