@@ -22,7 +22,9 @@ This course had **xx** projects and a **final** project as detailed below:
 - Project 6 - Build an Unsplash app with a search box, infinite scroll and model for api
 <img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project6.gif width="40%" height="40%">
 
-- Project 7 - Build a 
+- Project 7 - Build an Unsplash app with a search box, infinite scroll with Redux for state management
+<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project6.gif width="40%" height="40%">
+
 - Project 8 - Build a 
 - Project 9 - Build a
 - Project 10 - Build a
