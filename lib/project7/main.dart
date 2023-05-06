@@ -145,9 +145,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                          onPressed: () => _search(_searchController.text),
-                          child: const Text('search')),
+                      ElevatedButton(onPressed: () => _search(_searchController.text), child: const Text('search')),
                     ],
                   ),
                   Expanded(
