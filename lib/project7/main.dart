@@ -147,12 +147,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                       ElevatedButton(
                           onPressed: () => _search(_searchController.text),
-                          /*() {
-                        _images.clear();
-                        _query = _searchController.text;
-                        _page = 1;
-                        _loadImage();
-                      },*/
                           child: const Text('search')),
                     ],
                   ),
