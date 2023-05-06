@@ -28,6 +28,9 @@ analyzer:
     - "bin/cache/**"
       # Ignore protoc generated files
     - "dev/conductor/lib/proto/*"
+      # Ignore the freezed generated files
+    - '**/*.freezed.dart'
+    - '**/*.g.dart'
 
 linter:
   rules:
