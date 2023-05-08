@@ -70,7 +70,7 @@ class User with _$User {
     String? bio,
     String? location,
     Links? links,
-    @JsonKey(name: 'profile_image') ProfileImage? profileImage,
+    @JsonKey(name: 'profile_image') required ProfileImage profileImage,
     @JsonKey(name: 'instagram_username') String? instagramUsername,
     int? totalCollections,
     int? totalLikes,
@@ -86,9 +86,9 @@ class User with _$User {
 @freezed
 class ProfileImage with _$ProfileImage {
   const factory ProfileImage({
-    String? small,
-    String? medium,
-    String? large,
+    required String small,
+    required String medium,
+    required String large,
   }) = ProfileImage$;
 
   factory ProfileImage.fromJson(Map<dynamic, dynamic> json) => _$ProfileImageFromJson(Map<String, dynamic>.from(json));

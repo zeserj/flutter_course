@@ -1,5 +1,6 @@
 // Project 7 - Build an Unsplash app with a search box, infinite scroll with Redux for state management
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -7,12 +8,12 @@ import 'package:http/http.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 
-import 'actions/index.dart';
-import 'data/unsplash_api.dart';
-import 'epics/app_epics.dart';
-import 'models/index.dart';
-import 'presentation/containers/index.dart';
-import 'reducer/app_reducer.dart';
+import 'src/actions/index.dart';
+import 'src/data/unsplash_api.dart';
+import 'src/epics/app_epics.dart';
+import 'src/models/index.dart';
+import 'src/presentation/containers/index.dart';
+import 'src/reducer/app_reducer.dart';
 
 void main() async {
   await dotenv.load();
@@ -95,11 +96,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Unsplash App'),
-          centerTitle: true,
-          actions: <Widget>[
-            IsLoadingContainer(builder: (BuildContext context, bool isLoading) {
+      appBar: AppBar(
+        title: const Text('Unsplash App'),
+        centerTitle: true,
+        actions: <Widget>[
+          IsLoadingContainer(
+            builder: (BuildContext context, bool isLoading) {
               if (isLoading) {
                 return const Center(
                   child: FittedBox(
@@ -112,10 +114,12 @@ class _HomePageState extends State<HomePage> {
               } else {
                 return Container();
               }
-            })
-          ],
-        ),
-        body: IsLoadingContainer(builder: (BuildContext context, bool isLoading) {
+            },
+          ),
+        ],
+      ),
+      body: IsLoadingContainer(
+        builder: (BuildContext context, bool isLoading) {
           return ImagesContainer(
             builder: (BuildContext context, List<Picture> images) {
               if (isLoading && images.isEmpty) {
@@ -165,8 +169,8 @@ class _HomePageState extends State<HomePage> {
                           fit: StackFit.expand,
                           children: <Widget>[
                             GridTile(
-                              child: Image.network(
-                                picture.urls.regular,
+                              child: CachedNetworkImage(
+                                imageUrl: picture.urls.regular,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -184,15 +188,16 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 child: ListTile(
-                                    title: Text(
-                                      picture.user.username,
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                    trailing: CircleAvatar(
-                                      backgroundImage: NetworkImage(picture.user.profileImage!.small!),
-                                    )),
+                                  title: Text(
+                                    picture.user.username,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  trailing: CircleAvatar(
+                                    backgroundImage: CachedNetworkImageProvider(picture.user.profileImage.small),
+                                  ),
+                                ),
                               ),
-                            )
+                            ),
                           ],
                         );
                       },
@@ -202,6 +207,8 @@ class _HomePageState extends State<HomePage> {
               );
             },
           );
-        }));
+        },
+      ),
+    );
   }
 }

@@ -1286,7 +1286,7 @@ mixin _$User {
   String? get location => throw _privateConstructorUsedError;
   Links? get links => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_image')
-  ProfileImage? get profileImage => throw _privateConstructorUsedError;
+  ProfileImage get profileImage => throw _privateConstructorUsedError;
   @JsonKey(name: 'instagram_username')
   String? get instagramUsername => throw _privateConstructorUsedError;
   int? get totalCollections => throw _privateConstructorUsedError;
@@ -1317,7 +1317,7 @@ abstract class $UserCopyWith<$Res> {
       String? bio,
       String? location,
       Links? links,
-      @JsonKey(name: 'profile_image') ProfileImage? profileImage,
+      @JsonKey(name: 'profile_image') ProfileImage profileImage,
       @JsonKey(name: 'instagram_username') String? instagramUsername,
       int? totalCollections,
       int? totalLikes,
@@ -1327,7 +1327,7 @@ abstract class $UserCopyWith<$Res> {
       Social? social});
 
   $LinksCopyWith<$Res>? get links;
-  $ProfileImageCopyWith<$Res>? get profileImage;
+  $ProfileImageCopyWith<$Res> get profileImage;
   $SocialCopyWith<$Res>? get social;
 }
 
@@ -1354,7 +1354,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User> implements $UserCopyWith<$Res>
     Object? bio = freezed,
     Object? location = freezed,
     Object? links = freezed,
-    Object? profileImage = freezed,
+    Object? profileImage = null,
     Object? instagramUsername = freezed,
     Object? totalCollections = freezed,
     Object? totalLikes = freezed,
@@ -1408,10 +1408,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User> implements $UserCopyWith<$Res>
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as Links?,
-      profileImage: freezed == profileImage
+      profileImage: null == profileImage
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as ProfileImage?,
+              as ProfileImage,
       instagramUsername: freezed == instagramUsername
           ? _value.instagramUsername
           : instagramUsername // ignore: cast_nullable_to_non_nullable
@@ -1457,12 +1457,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User> implements $UserCopyWith<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $ProfileImageCopyWith<$Res>? get profileImage {
-    if (_value.profileImage == null) {
-      return null;
-    }
-
-    return $ProfileImageCopyWith<$Res>(_value.profileImage!, (value) {
+  $ProfileImageCopyWith<$Res> get profileImage {
+    return $ProfileImageCopyWith<$Res>(_value.profileImage, (value) {
       return _then(_value.copyWith(profileImage: value) as $Val);
     });
   }
@@ -1497,7 +1493,7 @@ abstract class _$$User$CopyWith<$Res> implements $UserCopyWith<$Res> {
       String? bio,
       String? location,
       Links? links,
-      @JsonKey(name: 'profile_image') ProfileImage? profileImage,
+      @JsonKey(name: 'profile_image') ProfileImage profileImage,
       @JsonKey(name: 'instagram_username') String? instagramUsername,
       int? totalCollections,
       int? totalLikes,
@@ -1509,7 +1505,7 @@ abstract class _$$User$CopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $LinksCopyWith<$Res>? get links;
   @override
-  $ProfileImageCopyWith<$Res>? get profileImage;
+  $ProfileImageCopyWith<$Res> get profileImage;
   @override
   $SocialCopyWith<$Res>? get social;
 }
@@ -1532,7 +1528,7 @@ class __$$User$CopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$User$> impl
     Object? bio = freezed,
     Object? location = freezed,
     Object? links = freezed,
-    Object? profileImage = freezed,
+    Object? profileImage = null,
     Object? instagramUsername = freezed,
     Object? totalCollections = freezed,
     Object? totalLikes = freezed,
@@ -1586,10 +1582,10 @@ class __$$User$CopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$User$> impl
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as Links?,
-      profileImage: freezed == profileImage
+      profileImage: null == profileImage
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as ProfileImage?,
+              as ProfileImage,
       instagramUsername: freezed == instagramUsername
           ? _value.instagramUsername
           : instagramUsername // ignore: cast_nullable_to_non_nullable
@@ -1637,7 +1633,7 @@ class _$User$ implements User$ {
       this.bio,
       this.location,
       this.links,
-      @JsonKey(name: 'profile_image') this.profileImage,
+      @JsonKey(name: 'profile_image') required this.profileImage,
       @JsonKey(name: 'instagram_username') this.instagramUsername,
       this.totalCollections,
       this.totalLikes,
@@ -1677,7 +1673,7 @@ class _$User$ implements User$ {
   final Links? links;
   @override
   @JsonKey(name: 'profile_image')
-  final ProfileImage? profileImage;
+  final ProfileImage profileImage;
   @override
   @JsonKey(name: 'instagram_username')
   final String? instagramUsername;
@@ -1776,7 +1772,7 @@ abstract class User$ implements User {
       final String? bio,
       final String? location,
       final Links? links,
-      @JsonKey(name: 'profile_image') final ProfileImage? profileImage,
+      @JsonKey(name: 'profile_image') required final ProfileImage profileImage,
       @JsonKey(name: 'instagram_username') final String? instagramUsername,
       final int? totalCollections,
       final int? totalLikes,
@@ -1816,7 +1812,7 @@ abstract class User$ implements User {
   Links? get links;
   @override
   @JsonKey(name: 'profile_image')
-  ProfileImage? get profileImage;
+  ProfileImage get profileImage;
   @override
   @JsonKey(name: 'instagram_username')
   String? get instagramUsername;
@@ -1843,9 +1839,9 @@ ProfileImage _$ProfileImageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProfileImage {
-  String? get small => throw _privateConstructorUsedError;
-  String? get medium => throw _privateConstructorUsedError;
-  String? get large => throw _privateConstructorUsedError;
+  String get small => throw _privateConstructorUsedError;
+  String get medium => throw _privateConstructorUsedError;
+  String get large => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1857,7 +1853,7 @@ abstract class $ProfileImageCopyWith<$Res> {
   factory $ProfileImageCopyWith(ProfileImage value, $Res Function(ProfileImage) then) =
       _$ProfileImageCopyWithImpl<$Res, ProfileImage>;
   @useResult
-  $Res call({String? small, String? medium, String? large});
+  $Res call({String small, String medium, String large});
 }
 
 /// @nodoc
@@ -1872,23 +1868,23 @@ class _$ProfileImageCopyWithImpl<$Res, $Val extends ProfileImage> implements $Pr
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? small = freezed,
-    Object? medium = freezed,
-    Object? large = freezed,
+    Object? small = null,
+    Object? medium = null,
+    Object? large = null,
   }) {
     return _then(_value.copyWith(
-      small: freezed == small
+      small: null == small
           ? _value.small
           : small // ignore: cast_nullable_to_non_nullable
-              as String?,
-      medium: freezed == medium
+              as String,
+      medium: null == medium
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as String?,
-      large: freezed == large
+              as String,
+      large: null == large
           ? _value.large
           : large // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -1899,7 +1895,7 @@ abstract class _$$ProfileImage$CopyWith<$Res> implements $ProfileImageCopyWith<$
       __$$ProfileImage$CopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? small, String? medium, String? large});
+  $Res call({String small, String medium, String large});
 }
 
 /// @nodoc
@@ -1910,23 +1906,23 @@ class __$$ProfileImage$CopyWithImpl<$Res> extends _$ProfileImageCopyWithImpl<$Re
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? small = freezed,
-    Object? medium = freezed,
-    Object? large = freezed,
+    Object? small = null,
+    Object? medium = null,
+    Object? large = null,
   }) {
     return _then(_$ProfileImage$(
-      small: freezed == small
+      small: null == small
           ? _value.small
           : small // ignore: cast_nullable_to_non_nullable
-              as String?,
-      medium: freezed == medium
+              as String,
+      medium: null == medium
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as String?,
-      large: freezed == large
+              as String,
+      large: null == large
           ? _value.large
           : large // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -1934,16 +1930,16 @@ class __$$ProfileImage$CopyWithImpl<$Res> extends _$ProfileImageCopyWithImpl<$Re
 /// @nodoc
 @JsonSerializable()
 class _$ProfileImage$ implements ProfileImage$ {
-  const _$ProfileImage$({this.small, this.medium, this.large});
+  const _$ProfileImage$({required this.small, required this.medium, required this.large});
 
   factory _$ProfileImage$.fromJson(Map<String, dynamic> json) => _$$ProfileImage$FromJson(json);
 
   @override
-  final String? small;
+  final String small;
   @override
-  final String? medium;
+  final String medium;
   @override
-  final String? large;
+  final String large;
 
   @override
   String toString() {
@@ -1979,16 +1975,17 @@ class _$ProfileImage$ implements ProfileImage$ {
 }
 
 abstract class ProfileImage$ implements ProfileImage {
-  const factory ProfileImage$({final String? small, final String? medium, final String? large}) = _$ProfileImage$;
+  const factory ProfileImage$(
+      {required final String small, required final String medium, required final String large}) = _$ProfileImage$;
 
   factory ProfileImage$.fromJson(Map<String, dynamic> json) = _$ProfileImage$.fromJson;
 
   @override
-  String? get small;
+  String get small;
   @override
-  String? get medium;
+  String get medium;
   @override
-  String? get large;
+  String get large;
   @override
   @JsonKey(ignore: true)
   _$$ProfileImage$CopyWith<_$ProfileImage$> get copyWith => throw _privateConstructorUsedError;

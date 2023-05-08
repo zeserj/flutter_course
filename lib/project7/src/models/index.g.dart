@@ -117,8 +117,7 @@ _$User$ _$$User$FromJson(Map<String, dynamic> json) => _$User$(
       bio: json['bio'] as String?,
       location: json['location'] as String?,
       links: json['links'] == null ? null : Links.fromJson(json['links'] as Map<String, dynamic>),
-      profileImage:
-          json['profile_image'] == null ? null : ProfileImage.fromJson(json['profile_image'] as Map<String, dynamic>),
+      profileImage: ProfileImage.fromJson(json['profile_image'] as Map<String, dynamic>),
       instagramUsername: json['instagram_username'] as String?,
       totalCollections: json['totalCollections'] as int?,
       totalLikes: json['totalLikes'] as int?,
@@ -151,9 +150,9 @@ Map<String, dynamic> _$$User$ToJson(_$User$ instance) => <String, dynamic>{
     };
 
 _$ProfileImage$ _$$ProfileImage$FromJson(Map<String, dynamic> json) => _$ProfileImage$(
-      small: json['small'] as String?,
-      medium: json['medium'] as String?,
-      large: json['large'] as String?,
+      small: json['small'] as String,
+      medium: json['medium'] as String,
+      large: json['large'] as String,
     );
 
 Map<String, dynamic> _$$ProfileImage$ToJson(_$ProfileImage$ instance) => <String, dynamic>{
