@@ -29,4 +29,4 @@ This course had 8 projects and a final project as detailed below:
 <img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project6.gif width="40%" height="40%">
 
 - Final project - Final Project - Build an Unsplash app with a search box, infinite scroll, and image viewer with Redux for state management
-<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/project6.gif width="40%" height="40%">
+<img src=https://github.com/zeserj/flutter_course/raw/main/images/presentation/final.gif width="40%" height="40%">
