@@ -1,4 +1,4 @@
-import 'project7/main.dart' as run;
+import 'final/main.dart' as run;
 
 void main() {
   run.main();
