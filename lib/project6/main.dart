@@ -1,224 +1,127 @@
-// Project 6 - Build an Unsplash app with a search box, infinite scroll and model for api
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
-import 'picture.dart';
-
-Future<dynamic> main() async {
-  await dotenv.load();
-  runApp(const MyApp());
+void main() {
+  runApp(const MovieApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MovieApp extends StatelessWidget {
+  const MovieApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: UnsplashApp(),
+      home: HomePage(),
     );
   }
 }
 
-class UnsplashApp extends StatefulWidget {
-  const UnsplashApp({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<UnsplashApp> createState() => _UnsplashAppState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _UnsplashAppState extends State<UnsplashApp> {
-  final List<Picture> _images = <Picture>[];
-  bool _isLoading = false;
-  bool _hasMore = true;
-
-  final TextEditingController _searchController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
-
-  String _query = 'photos';
-  int _page = 1;
+class _HomePageState extends State<HomePage> {
+  final List<Movie> _movies = <Movie>[];
 
   @override
   void initState() {
     super.initState();
-    _loadImage();
-
-    _scrollController.addListener(_onScroll);
+    _getMovies();
   }
 
-  void _onScroll() {
-    final double height = MediaQuery.of(context).size.height;
-    final double offset = _scrollController.position.pixels;
-    final double maxScrollExtent = _scrollController.position.maxScrollExtent;
+  Future<void> _getMovies() async {
+    final Uri url = Uri(scheme: 'https', host: 'yts.mx', pathSegments: <String>[
+      'api',
+      'v2',
+      'list_movies.json'
+    ], queryParameters: <String, String>{
+      'page': '4',
+    });
 
-    if (_hasMore && !_isLoading && maxScrollExtent - offset < 3 * height) {
-      _page++;
-      _loadImage();
-    }
-  }
-
-  Future<List<Picture>> getImages(String query, int page) async {
-    final String? accessKey = dotenv.env['UNSPLASH_ACCESS_KEY'];
-
-    final Uri url = Uri(
-      scheme: 'https',
-      host: 'api.unsplash.com',
-      path: '/search/photos',
-      queryParameters: <String, String?>{
-        'client_id': '$accessKey',
-        'query': query,
-        'page': page.toString(),
-        'per_page': 30.toString(),
-      },
-    );
-
-    final http.Response response = await http.get(url);
+    final Response response = await get(url);
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> body = json.decode(response.body) as Map<String, dynamic>;
-      final List<dynamic> images = body['results'] as List<dynamic>;
-      _hasMore = _page < (body['total_pages'] as int);
+      final Map<String, dynamic> map = jsonDecode(response.body) as Map<String, dynamic>;
+      final Map<String, dynamic> data = map['data'] as Map<String, dynamic>;
+      final List<dynamic> movies = data['movies'] as List<dynamic>;
 
-      return images.cast<Map<dynamic, dynamic>>().map((Map<dynamic, dynamic> json) => Picture.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load image');
+      for (int i = 0; i < movies.length; i++) {
+        final Map<String, dynamic> movie = movies[i] as Map<String, dynamic>;
+        final Movie item = Movie(
+            title: movie['title'] as String,
+            image: movie['medium_cover_image'] as String,
+            rating: movie['rating'] as num,
+            year: movie['year'] as int);
+        _movies.add(item);
+      }
     }
-  }
 
-  Future<void> _loadImage() async {
-    try {
-      setState(() {
-        _isLoading = true;
-      });
-      final List<Picture> imageUrls = await getImages(_query, _page);
-
-      setState(() {
-        if (_page == 1) {
-          _images.clear();
-        }
-        _images.addAll(imageUrls);
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+    setState(() {
+      // update list
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Unsplash App'),
-        centerTitle: true,
-        actions: <Widget>[
-          if (_isLoading)
-            const Center(
-              child: FittedBox(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            ),
-        ],
-      ),
-      body: _isLoading && _page == 1
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
+      appBar: AppBar(title: const Text('Movies App'), centerTitle: true),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(4.0),
+        itemCount: _movies.length,
+        itemBuilder: (BuildContext context, int index) {
+          final Movie movie = _movies[index];
+
+          return GridTile(
+            child: Stack(
+              fit: StackFit.expand,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: _searchController,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                            hintText: 'Search...',
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.clear),
-                              onPressed: () => _searchController.clear(),
-                            ),
-                            border: const OutlineInputBorder(),
-                          ),
+                Image.network(movie.image, fit: BoxFit.cover),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                    color: Colors.black54,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '${movie.title} (${movie.year})',
+                          style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
                         ),
-                      ),
+                        const SizedBox(height: 4.0),
+                        Text(
+                          'Rating: ${movie.rating}',
+                          style: const TextStyle(fontSize: 14.0, color: Colors.white),
+                        ),
+                      ],
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          _images.clear();
-                          _query = _searchController.text;
-                          _page = 1;
-                          _loadImage();
-                        },
-                        child: const Text('search')),
-                  ],
+                  ),
                 ),
-                Expanded(
-                    flex: 4,
-                    child: GridView.builder(
-                      controller: _scrollController,
-                      itemCount: _images.length,
-                      padding: const EdgeInsets.all(10),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 4,
-                        mainAxisSpacing: 4,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        final Picture picture = _images[index];
-                        return Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            GridTile(
-                              child: Image.network(
-                                picture.urls.regular,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional.bottomEnd,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: AlignmentDirectional.bottomCenter,
-                                    end: AlignmentDirectional.topCenter,
-                                    colors: <Color>[
-                                      Colors.black45,
-                                      Colors.black12,
-                                    ],
-                                  ),
-                                ),
-                                child: ListTile(
-                                    title: Text(
-                                      picture.user.username,
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                    trailing: CircleAvatar(
-                                      backgroundImage: NetworkImage(picture.user.profileImage!.small!),
-                                    )),
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                    )),
               ],
             ),
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
+        ),
+      ),
     );
   }
+}
+
+class Movie {
+  Movie({required this.title, required this.image, required this.rating, required this.year});
+
+  final String title;
+  final String image;
+  final num rating;
+  final int year;
 }

@@ -9,6 +9,10 @@ part of 'index.dart';
 _$AppState$ _$$AppState$FromJson(Map<String, dynamic> json) => _$AppState$(
       images: (json['images'] as List<dynamic>?)?.map((e) => Picture.fromJson(e as Map<String, dynamic>)).toList() ??
           const <Picture>[],
+      favoriteImages: (json['favoriteImages'] as List<dynamic>?)
+              ?.map((e) => Picture.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Picture>[],
       isLoading: json['isLoading'] as bool? ?? false,
       hasMore: json['hasMore'] as bool? ?? true,
       query: json['query'] as String? ?? 'photos',
@@ -18,6 +22,7 @@ _$AppState$ _$$AppState$FromJson(Map<String, dynamic> json) => _$AppState$(
 
 Map<String, dynamic> _$$AppState$ToJson(_$AppState$ instance) => <String, dynamic>{
       'images': instance.images,
+      'favoriteImages': instance.favoriteImages,
       'isLoading': instance.isLoading,
       'hasMore': instance.hasMore,
       'query': instance.query,

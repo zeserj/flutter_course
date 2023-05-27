@@ -608,3 +608,141 @@ abstract class SetSelectedImage$ implements SetSelectedImage {
   @JsonKey(ignore: true)
   _$$SetSelectedImage$CopyWith<_$SetSelectedImage$> get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$SetFavoriteImage {
+  Picture get picture => throw _privateConstructorUsedError;
+  bool get addFavorite => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetFavoriteImageCopyWith<SetFavoriteImage> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetFavoriteImageCopyWith<$Res> {
+  factory $SetFavoriteImageCopyWith(SetFavoriteImage value, $Res Function(SetFavoriteImage) then) =
+      _$SetFavoriteImageCopyWithImpl<$Res, SetFavoriteImage>;
+  @useResult
+  $Res call({Picture picture, bool addFavorite});
+
+  $PictureCopyWith<$Res> get picture;
+}
+
+/// @nodoc
+class _$SetFavoriteImageCopyWithImpl<$Res, $Val extends SetFavoriteImage> implements $SetFavoriteImageCopyWith<$Res> {
+  _$SetFavoriteImageCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? picture = null,
+    Object? addFavorite = null,
+  }) {
+    return _then(_value.copyWith(
+      picture: null == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as Picture,
+      addFavorite: null == addFavorite
+          ? _value.addFavorite
+          : addFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PictureCopyWith<$Res> get picture {
+    return $PictureCopyWith<$Res>(_value.picture, (value) {
+      return _then(_value.copyWith(picture: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$SetFavoriteImage$CopyWith<$Res> implements $SetFavoriteImageCopyWith<$Res> {
+  factory _$$SetFavoriteImage$CopyWith(_$SetFavoriteImage$ value, $Res Function(_$SetFavoriteImage$) then) =
+      __$$SetFavoriteImage$CopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Picture picture, bool addFavorite});
+
+  @override
+  $PictureCopyWith<$Res> get picture;
+}
+
+/// @nodoc
+class __$$SetFavoriteImage$CopyWithImpl<$Res> extends _$SetFavoriteImageCopyWithImpl<$Res, _$SetFavoriteImage$>
+    implements _$$SetFavoriteImage$CopyWith<$Res> {
+  __$$SetFavoriteImage$CopyWithImpl(_$SetFavoriteImage$ _value, $Res Function(_$SetFavoriteImage$) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? picture = null,
+    Object? addFavorite = null,
+  }) {
+    return _then(_$SetFavoriteImage$(
+      null == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as Picture,
+      addFavorite: null == addFavorite
+          ? _value.addFavorite
+          : addFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetFavoriteImage$ implements SetFavoriteImage$ {
+  const _$SetFavoriteImage$(this.picture, {required this.addFavorite});
+
+  @override
+  final Picture picture;
+  @override
+  final bool addFavorite;
+
+  @override
+  String toString() {
+    return 'SetFavoriteImage(picture: $picture, addFavorite: $addFavorite)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetFavoriteImage$ &&
+            (identical(other.picture, picture) || other.picture == picture) &&
+            (identical(other.addFavorite, addFavorite) || other.addFavorite == addFavorite));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, picture, addFavorite);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetFavoriteImage$CopyWith<_$SetFavoriteImage$> get copyWith =>
+      __$$SetFavoriteImage$CopyWithImpl<_$SetFavoriteImage$>(this, _$identity);
+}
+
+abstract class SetFavoriteImage$ implements SetFavoriteImage {
+  const factory SetFavoriteImage$(final Picture picture, {required final bool addFavorite}) = _$SetFavoriteImage$;
+
+  @override
+  Picture get picture;
+  @override
+  bool get addFavorite;
+  @override
+  @JsonKey(ignore: true)
+  _$$SetFavoriteImage$CopyWith<_$SetFavoriteImage$> get copyWith => throw _privateConstructorUsedError;
+}

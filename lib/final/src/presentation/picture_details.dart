@@ -9,7 +9,7 @@ class PictureDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectedPictureContainer(
+    return SelectedImageContainer(
       builder: (BuildContext context, Picture picture) {
         return Scaffold(
           appBar: AppBar(
@@ -32,7 +32,7 @@ class PictureDetails extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Table(
                   children: <TableRow>[
                     TableRow(children: <Widget>[

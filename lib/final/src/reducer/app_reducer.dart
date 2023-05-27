@@ -17,6 +17,7 @@ Reducer<AppState> _reducer = combineReducers(<Reducer<AppState>>[
   TypedReducer<AppState, GetImagesSuccessful>(_getImagesSuccessful).call,
   TypedReducer<AppState, GetImagesError>(_getImagesError).call,
   TypedReducer<AppState, SetSelectedImage>(_setSelectedImage).call,
+  TypedReducer<AppState, SetFavoriteImage>(_setFavoriteImage).call,
 ]);
 
 AppState _getImagesStart(AppState state, GetImagesStart action) {
@@ -45,4 +46,19 @@ AppState _getImagesError(AppState state, GetImagesError action) {
 
 AppState _setSelectedImage(AppState state, SetSelectedImage action) {
   return state.copyWith(selectedPictureId: action.pictureId);
+}
+
+AppState _setFavoriteImage(AppState state, SetFavoriteImage action) {
+  final List<Picture> favoriteImages = <Picture>[...state.favoriteImages];
+  final int index = favoriteImages.indexWhere((Picture favorite) => favorite.id == action.picture.id);
+
+  if (action.addFavorite) {
+    if (index == -1) {
+      favoriteImages.add(action.picture);
+    }
+  } else {
+    favoriteImages.removeAt(index);
+  }
+
+  return state.copyWith(favoriteImages: favoriteImages);
 }

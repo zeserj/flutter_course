@@ -4,6 +4,7 @@ part of 'index.dart';
 class AppState with _$AppState {
   const factory AppState({
     @Default(<Picture>[]) List<Picture> images,
+    @Default(<Picture>[]) List<Picture> favoriteImages,
     @Default(false) bool isLoading,
     @Default(true) bool hasMore,
     @Default('photos') String query,

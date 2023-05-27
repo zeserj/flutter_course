@@ -6,4 +6,5 @@ import '../../models/index.dart';
 
 part 'images_container.dart';
 part 'is_loading_container.dart';
-part 'selected_picture_container.dart';
+part 'selected_image_container.dart';
+part 'favorite_images_container.dart';

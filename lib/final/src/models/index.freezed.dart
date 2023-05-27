@@ -21,6 +21,7 @@ AppState _$AppStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AppState {
   List<Picture> get images => throw _privateConstructorUsedError;
+  List<Picture> get favoriteImages => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasMore => throw _privateConstructorUsedError;
   String get query => throw _privateConstructorUsedError;
@@ -36,7 +37,14 @@ mixin _$AppState {
 abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) = _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({List<Picture> images, bool isLoading, bool hasMore, String query, int page, String? selectedPictureId});
+  $Res call(
+      {List<Picture> images,
+      List<Picture> favoriteImages,
+      bool isLoading,
+      bool hasMore,
+      String query,
+      int page,
+      String? selectedPictureId});
 }
 
 /// @nodoc
@@ -52,6 +60,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState> implements $AppStateCo
   @override
   $Res call({
     Object? images = null,
+    Object? favoriteImages = null,
     Object? isLoading = null,
     Object? hasMore = null,
     Object? query = null,
@@ -62,6 +71,10 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState> implements $AppStateCo
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
+              as List<Picture>,
+      favoriteImages: null == favoriteImages
+          ? _value.favoriteImages
+          : favoriteImages // ignore: cast_nullable_to_non_nullable
               as List<Picture>,
       isLoading: null == isLoading
           ? _value.isLoading
@@ -92,7 +105,14 @@ abstract class _$$AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
   factory _$$AppState$CopyWith(_$AppState$ value, $Res Function(_$AppState$) then) = __$$AppState$CopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Picture> images, bool isLoading, bool hasMore, String query, int page, String? selectedPictureId});
+  $Res call(
+      {List<Picture> images,
+      List<Picture> favoriteImages,
+      bool isLoading,
+      bool hasMore,
+      String query,
+      int page,
+      String? selectedPictureId});
 }
 
 /// @nodoc
@@ -104,6 +124,7 @@ class __$$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res, _$App
   @override
   $Res call({
     Object? images = null,
+    Object? favoriteImages = null,
     Object? isLoading = null,
     Object? hasMore = null,
     Object? query = null,
@@ -114,6 +135,10 @@ class __$$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res, _$App
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
+              as List<Picture>,
+      favoriteImages: null == favoriteImages
+          ? _value._favoriteImages
+          : favoriteImages // ignore: cast_nullable_to_non_nullable
               as List<Picture>,
       isLoading: null == isLoading
           ? _value.isLoading
@@ -144,12 +169,14 @@ class __$$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res, _$App
 class _$AppState$ implements AppState$ {
   const _$AppState$(
       {final List<Picture> images = const <Picture>[],
+      final List<Picture> favoriteImages = const <Picture>[],
       this.isLoading = false,
       this.hasMore = true,
       this.query = 'photos',
       this.page = 1,
       this.selectedPictureId})
-      : _images = images;
+      : _images = images,
+        _favoriteImages = favoriteImages;
 
   factory _$AppState$.fromJson(Map<String, dynamic> json) => _$$AppState$FromJson(json);
 
@@ -160,6 +187,15 @@ class _$AppState$ implements AppState$ {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
+  }
+
+  final List<Picture> _favoriteImages;
+  @override
+  @JsonKey()
+  List<Picture> get favoriteImages {
+    if (_favoriteImages is EqualUnmodifiableListView) return _favoriteImages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_favoriteImages);
   }
 
   @override
@@ -179,7 +215,7 @@ class _$AppState$ implements AppState$ {
 
   @override
   String toString() {
-    return 'AppState(images: $images, isLoading: $isLoading, hasMore: $hasMore, query: $query, page: $page, selectedPictureId: $selectedPictureId)';
+    return 'AppState(images: $images, favoriteImages: $favoriteImages, isLoading: $isLoading, hasMore: $hasMore, query: $query, page: $page, selectedPictureId: $selectedPictureId)';
   }
 
   @override
@@ -188,6 +224,7 @@ class _$AppState$ implements AppState$ {
         (other.runtimeType == runtimeType &&
             other is _$AppState$ &&
             const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other._favoriteImages, _favoriteImages) &&
             (identical(other.isLoading, isLoading) || other.isLoading == isLoading) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             (identical(other.query, query) || other.query == query) &&
@@ -197,8 +234,8 @@ class _$AppState$ implements AppState$ {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_images), isLoading, hasMore, query, page, selectedPictureId);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_favoriteImages), isLoading, hasMore, query, page, selectedPictureId);
 
   @JsonKey(ignore: true)
   @override
@@ -216,6 +253,7 @@ class _$AppState$ implements AppState$ {
 abstract class AppState$ implements AppState {
   const factory AppState$(
       {final List<Picture> images,
+      final List<Picture> favoriteImages,
       final bool isLoading,
       final bool hasMore,
       final String query,
@@ -226,6 +264,8 @@ abstract class AppState$ implements AppState {
 
   @override
   List<Picture> get images;
+  @override
+  List<Picture> get favoriteImages;
   @override
   bool get isLoading;
   @override

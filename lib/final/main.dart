@@ -11,6 +11,7 @@ import 'src/actions/index.dart';
 import 'src/data/unsplash_api.dart';
 import 'src/epics/app_epics.dart';
 import 'src/models/index.dart';
+import 'src/presentation/favorite_images_page.dart';
 import 'src/presentation/home_page.dart';
 import 'src/presentation/picture_details.dart';
 import 'src/reducer/app_reducer.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/': (BuildContext context) => const HomePage(),
           '/details': (BuildContext context) => const PictureDetails(),
+          '/favorites': (BuildContext context) => const FavoriteImagesPage(),
         },
       ),
     );
